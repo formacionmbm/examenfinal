@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,12 +26,12 @@ public class SearchLibrariesController {
     @GetMapping
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
-
+        loadCategories(model);
         return VIEW_SEARCH;
     }
 
     @PostMapping
-    public String search(){
+    public String search(@RequestParam String texto, Model model){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
