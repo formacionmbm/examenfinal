@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,11 +24,14 @@ public class SearchLibrariesController {
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
 
+        List<Category> categories = search.findAllCategories();
+        model.addAttribute("categories",categories);
+
         return VIEW_SEARCH;
     }
 
     @PostMapping
-    public String search(){
+    public String search(@RequestParam(required=false) String texto, Model model){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
@@ -44,6 +45,7 @@ public class SearchLibrariesController {
         return VIEW_SEARCH;
     }
 
+    @GetMapping("/categories")
     private void loadCategories(Model model){
         log.debug("[loadCategories]");
         List<Category> categories = search.findAllCategories();

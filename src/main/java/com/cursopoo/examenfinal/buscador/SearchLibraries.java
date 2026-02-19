@@ -8,6 +8,7 @@ import com.cursopoo.examenfinal.repositories.CategoryRepository;
 import com.cursopoo.examenfinal.repositories.LibraryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ public class SearchLibraries implements Search {
     public List<Library> findAllLibraries() {
         log.info("[findAllLibraries]");
         try{
-
-            return null;
+            return repository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             throw new AppException(e.getMessage());
@@ -40,14 +40,14 @@ public class SearchLibraries implements Search {
     public List<Category> findAllCategories() {
         log.info("[findAllCategories]");
         try{
-
             return categoryRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            throw new RuntimeException(e.getMessage());
+            throw new AppException(e.getMessage());
         }
     }
 
+    @Override
     public List<Library> findLibrariesByTexto(String texto){
         log.info("[findLibrariesByTexto]");
         log.debug("[texto:{}]",texto);
@@ -64,11 +64,12 @@ public class SearchLibraries implements Search {
                 log.debug("Buscamos la categoría:{}",nameCategory);
                 Optional<Category> category = categoryRepository.findByName(nameCategory);
                 if(category.isPresent()){
-                    libraries.addAll(null);
+                    List<Library> listLi = repository.findByCategory(category.get());
+                    libraries.addAll(listLi);
                 }
             }
             log.debug("[libraries:{}]",libraries);
-            return null;
+            return libraries;
 
         } catch (Exception e) {
             log.error(e.getMessage(),e);
