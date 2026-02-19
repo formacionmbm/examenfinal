@@ -14,11 +14,11 @@
 <h2 style="text-align:center;">Búsqueda de Librerias</h2>
 
 <!-- 🔎 Formulario -->
-
+<!-- CAMBIOS estaba busqueda en vez de texto -->
 <div class="search-box">
     <form method="post" th:action="@{/}">
         <input type="text"
-               name="busqueda"
+               name="texto"
                th:value="${texto}"
                placeholder="Buscar por categorias"/>
 
@@ -37,7 +37,8 @@
     <tr>
         <!-- Categorías en una sola celda -->
         <td>
-            <span th:each="cat, iter : ${listado}">
+            <!-- CAMBIOS listado por categorias -->
+            <span th:each="cat, iter : ${categories}">
                 <span th:text="${cat.name}"></span>
                 <span th:if="${!iter.last}">, </span>
             </span>
