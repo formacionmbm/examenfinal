@@ -20,14 +20,14 @@ public class RestSearchLibraries {
 
     private final Search search;
 
-    @GetMapping
+    @GetMapping("/li")
     public List<Library> findAll(){
         log.info("[findAll]");
         return search.findAllLibraries();
     }
 
     @PostMapping("/s/li")
-    public List<Library> search(){
+    public List<Library> search(String texto){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
