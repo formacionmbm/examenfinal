@@ -27,11 +27,18 @@ public class SearchLibraries implements Search {
     @Override
     public List<Library> findAllLibraries() {
         log.info("[findAllLibraries]");
-        try{
+        try {
 
-            return null;
+            List<Library> libraries = repository.findAll();
+
+            if (libraries == null || libraries.isEmpty()) {
+                throw new AppException("No libraries found");
+            }
+
+            return libraries;
+
         } catch (Exception e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
             throw new AppException(e.getMessage());
         }
     }
@@ -44,7 +51,7 @@ public class SearchLibraries implements Search {
             return categoryRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            throw new RuntimeException(e.getMessage());
+            throw new AppException(e.getMessage());
         }
     }
 
@@ -64,11 +71,12 @@ public class SearchLibraries implements Search {
                 log.debug("Buscamos la categoría:{}",nameCategory);
                 Optional<Category> category = categoryRepository.findByName(nameCategory);
                 if(category.isPresent()){
-                    libraries.addAll(null);
+                    //libraries.addAll(category.get().getLibraries());
+                    libraries.addAll(repository.findByCategory(category.get()));
                 }
             }
             log.debug("[libraries:{}]",libraries);
-            return null;
+            return libraries;
 
         } catch (Exception e) {
             log.error(e.getMessage(),e);

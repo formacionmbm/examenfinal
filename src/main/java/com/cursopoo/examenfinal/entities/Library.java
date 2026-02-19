@@ -19,6 +19,7 @@ public class Library {
     private String artifacId;
     private String version;
 
+
     @ManyToMany
     @JoinTable(
             name = "LIBRARY_CATEGORY",

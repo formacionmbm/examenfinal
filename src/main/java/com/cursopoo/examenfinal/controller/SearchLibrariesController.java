@@ -25,6 +25,8 @@ public class SearchLibrariesController {
     @GetMapping
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
+        List<Category> categories = search.findAllCategories();
+        model.addAttribute("categories",categories);
 
         return VIEW_SEARCH;
     }
@@ -40,6 +42,7 @@ public class SearchLibrariesController {
 
         model.addAttribute("elements",libraries);
         model.addAttribute("texto",texto);
+
 
         return VIEW_SEARCH;
     }
