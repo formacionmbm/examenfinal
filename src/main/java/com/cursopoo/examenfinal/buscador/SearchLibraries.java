@@ -1,6 +1,6 @@
 package com.cursopoo.examenfinal.buscador;
 
-import com.cursopoo.examenfinal.buscador.intefaces.Search;
+import com.cursopoo.examenfinal.buscador.interfaces.Search;
 import com.cursopoo.examenfinal.entities.Category;
 import com.cursopoo.examenfinal.entities.Library;
 import com.cursopoo.examenfinal.exceptions.AppException;
@@ -24,12 +24,19 @@ public class SearchLibraries implements Search {
     private final LibraryRepository repository;
     private final CategoryRepository categoryRepository;
 
+//    public void SearchLibrariesService (LibraryRepository repositorio) {
+//        this.repository = repositorio;
+//    }
+//
+//    public void SearchLibrariesService (CategoryRepository repositorio) {
+//        this.repository = repositorio;
+//    }
+
     @Override
     public List<Library> findAllLibraries() {
         log.info("[findAllLibraries]");
         try{
-
-            return null;
+            return repository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             throw new AppException(e.getMessage());
@@ -40,7 +47,6 @@ public class SearchLibraries implements Search {
     public List<Category> findAllCategories() {
         log.info("[findAllCategories]");
         try{
-
             return categoryRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
@@ -55,20 +61,19 @@ public class SearchLibraries implements Search {
         List<Library> libraries=new ArrayList<>();
 
         try {
-
             texto = procesarTexto(texto);
-
             String[] nameCategories = texto.split(" ");
 
             for (String nameCategory : nameCategories) {
                 log.debug("Buscamos la categoría:{}",nameCategory);
+
                 Optional<Category> category = categoryRepository.findByName(nameCategory);
                 if(category.isPresent()){
-                    libraries.addAll(null);
+                    libraries.addAll(repository.findByCategory(category.get()));
                 }
             }
             log.debug("[libraries:{}]",libraries);
-            return null;
+            return libraries;
 
         } catch (Exception e) {
             log.error(e.getMessage(),e);
@@ -76,3 +81,6 @@ public class SearchLibraries implements Search {
         }
     }
 }
+
+
+

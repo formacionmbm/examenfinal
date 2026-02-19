@@ -1,6 +1,6 @@
 package com.cursopoo.examenfinal.controller;
 
-import com.cursopoo.examenfinal.buscador.intefaces.Search;
+import com.cursopoo.examenfinal.buscador.interfaces.Search;
 import com.cursopoo.examenfinal.entities.Category;
 import com.cursopoo.examenfinal.entities.Library;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,12 +26,11 @@ public class SearchLibrariesController {
     @GetMapping
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
-
         return VIEW_SEARCH;
     }
 
     @PostMapping
-    public String search(){
+    public String search(@RequestParam String texto, Model model){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 

@@ -1,7 +1,7 @@
 package com.cursopoo.examenfinal.controller;
 
 
-import com.cursopoo.examenfinal.buscador.intefaces.Search;
+import com.cursopoo.examenfinal.buscador.interfaces.Search;
 import com.cursopoo.examenfinal.entities.Library;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
