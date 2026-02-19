@@ -22,7 +22,7 @@ class CategoryRepositoryTest {
 
         // Arrange
         Category category = new Category();
-        category.setId(1000);
+        category.setId(1000l);
         category.setName("BBDD");
         categoryRepository.save(category);
 

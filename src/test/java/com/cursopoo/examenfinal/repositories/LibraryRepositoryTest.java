@@ -26,7 +26,7 @@ class LibraryRepositoryTest {
 
         // Arrange: Crear categoría
         Category framework = new Category();
-        framework.setId(1000);
+        framework.setId(1000l);
         framework.setName("Framework");
         categoryRepository.save(framework);
 
@@ -61,7 +61,7 @@ class LibraryRepositoryTest {
 
         // Arrange
         Category emptyCategory = new Category();
-        emptyCategory.setId(2000);
+        emptyCategory.setId(2000l);
         emptyCategory.setName("Empty");
         categoryRepository.save(emptyCategory);
 

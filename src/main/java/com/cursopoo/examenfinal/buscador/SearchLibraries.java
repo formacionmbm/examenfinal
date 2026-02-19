@@ -28,7 +28,6 @@ public class SearchLibraries implements Search {
     public List<Library> findAllLibraries() {
         log.info("[findAllLibraries]");
         try {
-
             return repository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -55,31 +54,23 @@ public class SearchLibraries implements Search {
         List<Library> libraries = new ArrayList<>();
 
         try {
-            // 1. Evitamos que el programa explote si el texto llega nulo
             if (texto == null) return libraries;
 
-            // 2. Procesamos el texto (se supone que lo pasa a MAYÚSCULAS)
             texto = procesarTexto(texto);
-
-            // 3. Dividimos el texto por espacios para buscar cada palabra como categoría
             String[] nameCategories = texto.split(" ");
 
             for (String nameCategory : nameCategories) {
                 log.debug("Buscamos la categoría:{}", nameCategory);
 
-                // 4. Buscamos la categoría en la base de datos
-                Optional<Category> category = categoryRepository.findByName(nameCategory);
+                Optional<Category> category = categoryRepository.findByCategories(nameCategory);
 
                 if (category.isPresent()) {
-                    // 5. Si existe, buscamos las librerías de esa categoría y las añadimos a la lista
-                    List<Library> foundLibraries = repository.findByCategory(category.get());
+                    List<Library> foundLibraries = repository.findByName(category.get());
                     libraries.addAll(foundLibraries);
                 }
             }
 
             log.debug("[libraries:{}]", libraries);
-
-            // 6. DEVOLVEMOS LA LISTA (nunca null) para que el test sea verde
             return libraries;
 
         } catch (Exception e) {
