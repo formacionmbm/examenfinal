@@ -27,7 +27,7 @@ public class RestSearchLibraries {
     }
 
     @PostMapping("/s/li")
-    public List<Library> search(){
+    public List<Library> search(String texto){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
