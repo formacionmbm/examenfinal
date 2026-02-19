@@ -5,10 +5,7 @@ import com.cursopoo.examenfinal.entities.Category;
 import com.cursopoo.examenfinal.entities.Library;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,17 +14,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class RestSearchLibraries {
-    /*
+
     private final Search search;
 
-    @GetMapping
+    @GetMapping("/li")
     public List<Library> findAll(){
         log.info("[findAll]");
         return search.findAllLibraries();
     }
 
+
     @PostMapping("/s/li")
-    public List<Library> search(){
+    public List<Library> search(@RequestParam(name="texto") String texto){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
@@ -37,10 +35,13 @@ public class RestSearchLibraries {
         return libraries;
     }
 
+
     @GetMapping
     public List<Category> findAllCategories(){
         log.info("[findAllCategories]");
         return search.findAllCategories();
     }
-    */
+
+
+
 }
