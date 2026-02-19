@@ -30,7 +30,7 @@ public class SearchLibrariesController {
     }
 
     @PostMapping
-    public String search(){
+    public String search(String texto, Model model){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
