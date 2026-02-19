@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category,Long> {
-
-    Optional<Category> findByNombre(String name);
+//CAMBIOS estaba nombre y le puse name en el findby xq la entidad es name no nombre
+    Optional<Category> findByName(String name);
 }

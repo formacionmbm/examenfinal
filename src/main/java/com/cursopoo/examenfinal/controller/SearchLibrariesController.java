@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,16 +22,19 @@ public class SearchLibrariesController {
 
     private static final String VIEW_SEARCH = "t_libraries";
     private final Search search;
-
+//CAMBIOS meti el load para meterlas al modelo
     @GetMapping
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
+
+        loadCategories(model);
 
         return VIEW_SEARCH;
     }
 
     @PostMapping
-    public String search(){
+// CAMBIOS meti en la firma texto y model y el requst param  pra que lo del html lo meta en texto
+    public String search(@RequestParam(name="texto", required=false) String texto, Model model){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
