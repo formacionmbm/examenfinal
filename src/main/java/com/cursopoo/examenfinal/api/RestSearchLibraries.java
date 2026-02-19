@@ -20,6 +20,7 @@ public class RestSearchLibraries {
 
     private final Search search;
 
+
     @GetMapping
     public List<Library> findAll(){
         log.info("[findAll]");
