@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class RestSearchLibraries {
-
+    /*
     private final Search search;
 
     @GetMapping
@@ -42,4 +42,5 @@ public class RestSearchLibraries {
         log.info("[findAllCategories]");
         return search.findAllCategories();
     }
+    */
 }
