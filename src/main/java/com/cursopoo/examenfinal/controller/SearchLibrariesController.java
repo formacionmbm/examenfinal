@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class SearchLibrariesController {
     }
 
     @PostMapping
-    public String search(Model model, @RequestParam(name = "busqueda", required = false) String texto){
+    public String search(Model model, String texto){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
