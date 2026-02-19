@@ -20,7 +20,7 @@ public class RestSearchLibraries {
 
     private final Search search;
 
-    @GetMapping
+    @GetMapping("/li")
     public List<Library> findAll(){
         log.info("[findAll]");
         return search.findAllLibraries();
