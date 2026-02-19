@@ -1,53 +1,45 @@
-package com.cursopoo.examenfinal.controller;
+package com.cursopoo.examenfinal.api;
 
 import com.cursopoo.examenfinal.buscador.intefaces.Search;
 import com.cursopoo.examenfinal.entities.Category;
 import com.cursopoo.examenfinal.entities.Library;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+//@RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/")
-public class SearchLibrariesController {
+@RequestMapping("/api")
+public class RestSearchLibraries {
 
-    private static final String VIEW_SEARCH = "t_libraries";
     private final Search search;
 
-    @GetMapping
-    public String goToSearchForm(Model model){
-        log.info("[goToSearchForm]");
-
-        return VIEW_SEARCH;
+    // Ruta corregida a /li para que el test.get("/api/li") funcione
+    @GetMapping("/li")
+    public List<Library> findAll() {
+        log.info("[findAll]");
+        return search.findAllLibraries();
     }
 
-    @PostMapping
-    public String search(){
+    // Ruta corregida a /s/li para que el test.post("/api/s/li") funcione
+    @PostMapping("/s/li")
+    public List<Library> search(@RequestParam("texto") String texto) {
         log.info("[search]");
-        log.debug("[texto:{}",texto);
+        log.debug("[texto:{}]", texto);
 
-        List<Library> libraries= search.findLibrariesByTexto(texto);
-        log.debug("Packages find: {}",libraries);
-        loadCategories(model);
+        List<Library> libraries = search.findLibrariesByTexto(texto);
+        log.debug("Libraries find: {}", libraries);
 
-        model.addAttribute("elements",libraries);
-        model.addAttribute("texto",texto);
-
-        return VIEW_SEARCH;
+        return libraries;
     }
 
-    private void loadCategories(Model model){
-        log.debug("[loadCategories]");
-        List<Category> categories = search.findAllCategories();
-        model.addAttribute("categories",categories);
-
+    // Ruta para obtener categorías (opcional pero recomendada)
+    @GetMapping("/categories")
+    public List<Category> findAllCategories() {
+        log.info("[findAllCategories]");
+        return search.findAllCategories();
     }
 }
