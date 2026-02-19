@@ -24,14 +24,6 @@ public class SearchLibraries implements Search {
     private final LibraryRepository repository;
     private final CategoryRepository categoryRepository;
 
-//    public void SearchLibrariesService (LibraryRepository repositorio) {
-//        this.repository = repositorio;
-//    }
-//
-//    public void SearchLibrariesService (CategoryRepository repositorio) {
-//        this.repository = repositorio;
-//    }
-
     @Override
     public List<Library> findAllLibraries() {
         log.info("[findAllLibraries]");
@@ -50,7 +42,7 @@ public class SearchLibraries implements Search {
             return categoryRepository.findAll();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            throw new RuntimeException(e.getMessage());
+            throw new AppException("Error retrieving categories");
         }
     }
 

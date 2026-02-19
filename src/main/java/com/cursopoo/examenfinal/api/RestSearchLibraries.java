@@ -17,7 +17,7 @@ public class RestSearchLibraries {
 
     private final Search search;
 
-    @GetMapping ("/l/libraries")
+    @GetMapping ("/li")
     public List<Library> findAll(){
         log.info("[findAll]");
         return search.findAllLibraries();
@@ -26,11 +26,10 @@ public class RestSearchLibraries {
     @PostMapping("/s/li")
     public List<Library> search(@RequestParam String texto){
         log.info("[search]");
-        log.debug("[texto:{}",texto);
+        log.debug("[texto:{}]",texto);
 
         List<Library> libraries= search.findLibrariesByTexto(texto);
         log.debug("Libraries find: {}",libraries);
-
         return libraries;
     }
 
