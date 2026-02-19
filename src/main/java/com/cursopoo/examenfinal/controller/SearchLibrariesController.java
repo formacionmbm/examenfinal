@@ -25,6 +25,8 @@ public class SearchLibrariesController {
     @GetMapping
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
+        loadCategories(model);
+
 
         return VIEW_SEARCH;
     }
