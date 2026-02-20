@@ -25,12 +25,13 @@ public class SearchLibrariesController {
     @GetMapping
     public String goToSearchForm(Model model){
         log.info("[goToSearchForm]");
+        loadCategories(model);
 
         return VIEW_SEARCH;
     }
 
     @PostMapping
-    public String search(){
+    public String search(String texto, Model model){
         log.info("[search]");
         log.debug("[texto:{}",texto);
 
